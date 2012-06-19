@@ -1,0 +1,23 @@
+<%  
+    import org.exoplatform.webui.core.UIComponent;
+    import org.exoplatform.webui.bean.UIDataFeed;
+    
+    boolean hasNext = uicomponent.getDataFeed().hasNext();
+    boolean isAutoAdjustHeight = uicomponent.isAutoAdjustHeight();
+    def rcontext = _ctx.getRequestContext();
+    
+    rcontext.getJavascriptManager().loadScriptResource('webui-ext');
+    
+    String url = uicomponent.url("LoadNext") + "&ajaxRequest=true"; 
+    String css = "";
+    if (uicomponent.getHeight() > 0) {
+       css = "height: " + uicomponent.getHeight() + "px";
+    }
+%>
+<div id="$uicomponent.id" class="UIVirtualList" style="overflow:auto; $css" 
+  onscroll="eXo.webui.UIVirtualList.onScroll(this,'$url');">    
+  <% uicomponent.renderChildren();%>
+  <% 
+    rcontext.getJavascriptManager().addJavascript("eXo.webui.UIVirtualList.init('$uicomponent.id', $hasNext, $isAutoAdjustHeight);");
+  %>
+</div>

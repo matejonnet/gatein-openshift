@@ -1,0 +1,30 @@
+<%
+	/**
+	 * Created by The eXo Platform SARL
+	 * Author : Pham Dung Ha
+	 *          ha.pham@exoplatform.com
+	 * March 13, 2006
+	 * version: $Id$
+	 */
+
+	String maskId = uicomponent.getId() ;
+  boolean isShow = uicomponent.isShow();
+%>	
+<div class="UIMaskWorkspace" id="$maskId" style="display: none;">
+<%
+  if (isShow)
+  {
+    def rcontext = _ctx.getRequestContext() ;
+    int width = uicomponent.getWindowWidth();
+    int height = uicomponent.getWindowHeight();
+
+    String script = "eXo.portal.UIMaskWorkspace.show('"+maskId+"', "+width+", "+height+");";
+    rcontext.getJavascriptManager().addCustomizedOnLoadScript(script) ;
+%>
+    <div class="MaskContainer">
+      <%uicomponent.renderChildren();%>
+    </div>
+<%
+  }
+%>
+</div>
