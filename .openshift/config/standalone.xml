@@ -28,8 +28,8 @@
     </extensions>
 
    <system-properties>
-        <property name="exo.conf.dir" value="${env.OPENSHIFT_APP_DIR}jbossas-7/standalone/configuration/gatein" />
-        <property name="gatein.conf.dir" value="${env.OPENSHIFT_APP_DIR}jbossas-7/standalone/configuration/gatein" />
+        <property name="exo.conf.dir" value="${env.OPENSHIFT_GEAR_DIR}jbossas-7/standalone/configuration/gatein" />
+        <property name="gatein.conf.dir" value="${env.OPENSHIFT_GEAR_DIR}jbossas-7/standalone/configuration/gatein" />
         <property name="exo.conf.dir.name" value="gatein" />
    </system-properties>
    

@@ -1,0 +1,5 @@
+Under construction. Requires OpenShift cartidge update.
+
+git remote add gatein-openshift https://github.com/matejonnet/gatein-openshift.git
+git pull --depth=1 -s recursive -X theirs gatein-openshift master
+git push origin master

@@ -9,37 +9,41 @@ gatein_git=${gatein_home}gatein-portal-git/
 gatein_modules=${gatein_home}jboss-as7-modules/
 gatein_built_marker=${gatein_home}built
 
+jboss_as7_home=/opt/jboss-as-7.1.0.Final/
+
 if [ ! -d "${gatein_home}" ]; then
 	mkdir ${gatein_home}
 fi
 
-validate_marker
+#validate_marker
+
+if [ ! -d ${gatein_git}.git ]; then
+    git clone --depth=1 https://github.com/gatein/gatein-portal.git ${gatein_git}
+	#git --git-dir=${gatein_git}.git --work-tree=${gatein_git} reset --hard
+	git --git-dir=${gatein_git}.git --work-tree=${gatein_git} checkout 3.3.0-GA
+fi
 
 if [ ! -f $gatein_built_marker ]; then
-    git clone --depth=1 https://github.com/gatein/gatein-portal.git ${gatein_git}
-	cd ${gatein_git}
-	git checkout 3.3.0-GA
-	cd -
 
 	sed -i -e "s/\${server.name}/jboss-as7/g" ${gatein_git}packaging/jboss-as7/modules/build.xml > /dev/null 2>&1
 	mvn -f ${gatein_git}packaging/jboss-as7/modules/pom.xml clean install
 
-	mv ${gatein_git}packaging/jboss-as7/modules/target/jboss-as7-gatein-modules ${gatein_modules}
+	cp -rf ${gatein_git}packaging/jboss-as7/modules/target/jboss-as7/gatein/modules/* ${gatein_modules}
 
-	#FIXME - edit path
-	cp /opt/PATH_TO_JBOSS_AS_INSTALATION/modules/org/jboss/as/web/main/* ${gatein_modules}org/jboss/as/web/main/
+	if [ ! -d ${gatein_modules}org/jboss/as/web/main ]; then
+		mkdir -p ${gatein_modules}org/jboss/as/web/main
+	fi
 
+	cp ${jboss_as7_home}/modules/org/jboss/as/web/main/* ${gatein_modules}org/jboss/as/web/main/
 	cp -f ${gatein_git}packaging/jboss-as7/pkg/src/main/resources/jboss/modules/org/jboss/as/web/main/module.xml \
 		${gatein_modules}org/jboss/as/web/main/
-		
 		
 	#next time skip build process
 	date +%s > gatein_built_marker
 fi
 
-function validate_marker {
+#function validate_marker {
 	#TODO - remove gatein_built_marker file if older than 24h
 	#think about case if user redeploys app in 24h before we roll out updates
 	#check for local system jboss AS version to force update
-	
-}
+#}
