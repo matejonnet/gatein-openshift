@@ -15,15 +15,14 @@ if [ ! -d "${gatein_home}" ]; then
 	mkdir ${gatein_home}
 fi
 
-#validate_marker
-
 if [ ! -d ${gatein_git}.git ]; then
     git clone --depth=1 https://github.com/gatein/gatein-portal.git ${gatein_git}
-	#git --git-dir=${gatein_git}.git --work-tree=${gatein_git} reset --hard
-	git --git-dir=${gatein_git}.git --work-tree=${gatein_git} checkout 3.3.0-GA
 fi
 
 if [ ! -f $gatein_built_marker ]; then
+
+	#TODO download as archive
+	git --git-dir=${gatein_git}.git --work-tree=${gatein_git} checkout 3.3.0-GA
 
 	sed -i -e "s/\${server.name}/jboss-as7/g" ${gatein_git}packaging/jboss-as7/modules/build.xml > /dev/null 2>&1
 	mvn -f ${gatein_git}packaging/jboss-as7/modules/pom.xml clean install
@@ -41,9 +40,3 @@ if [ ! -f $gatein_built_marker ]; then
 	#next time skip build process
 	date +%s > gatein_built_marker
 fi
-
-#function validate_marker {
-	#TODO - remove gatein_built_marker file if older than 24h
-	#think about case if user redeploys app in 24h before we roll out updates
-	#check for local system jboss AS version to force update
-#}
