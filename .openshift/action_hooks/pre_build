@@ -38,5 +38,5 @@ if [ ! -f $gatein_built_marker ]; then
 		${gatein_modules}org/jboss/as/web/main/
 		
 	#next time skip build process
-	date +%s > gatein_built_marker
+	date +%s > $gatein_built_marker
 fi
