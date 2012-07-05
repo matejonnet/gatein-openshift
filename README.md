@@ -28,7 +28,7 @@ Avoiding conflicts specify git options to prefer this repo content.
 
         git push origin master
         
-   Operation takes a while to complete, your OpenShift node is fulling in GateIn and building it.
+   Operation takes a while to complete, OpenShift node is pulling in GateIn and building it.
 
 1. Open GateIn portal in a web browser at \<your app name\>-\<your domain name\>.rhcloud.com/portal.
 
