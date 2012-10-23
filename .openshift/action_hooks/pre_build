@@ -12,7 +12,11 @@ gatein_built_marker=${gatein_home}built
 jboss_as7_home=/opt/jboss-as-7.1.0.Final/
 
 if [ ! -d "${gatein_home}" ]; then
-	mkdir ${gatein_home}
+	mkdir -p ${gatein_home}
+fi
+
+if [ ! -d "${gatein_modules}" ]; then
+	mkdir -p ${gatein_modules}
 fi
 
 if [ ! -d ${gatein_git}.git ]; then
