@@ -4,12 +4,12 @@
 # before the build step.  This script gets executed directly, so it
 # could be python, php, ruby, etc.
 
-gatein_home=${OPENSHIFT_RUNTIME_DIR}gatein/
+gatein_home=${OPENSHIFT_HOMEDIR}app-root/runtime/gatein/
 gatein_git=${gatein_home}gatein-portal-git/
 gatein_modules=${gatein_home}jboss-as7-modules/
 gatein_built_marker=${gatein_home}built
 
-jboss_as7_home=/opt/jboss-as-7.1.0.Final/
+jboss_as7_home=/opt/jboss-as-7.1.1.Final/
 
 if [ ! -d "${gatein_home}" ]; then
 	mkdir -p ${gatein_home}
