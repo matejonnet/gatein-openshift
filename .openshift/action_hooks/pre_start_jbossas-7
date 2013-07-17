@@ -13,4 +13,4 @@
 # Application start and stop is subject to different timeouts
 # throughout the system.
 
-export JBOSS_MODULEPATH_ADD=${OPENSHIFT_RUNTIME_DIR}gatein/jboss-as7-modules/
+export JBOSS_MODULEPATH_ADD=${OPENSHIFT_HOMEDIR}app-root/runtime/gatein/jboss-as7-modules/

@@ -21,7 +21,7 @@ Follow this instructions to run [GateIn](http://www.jboss.org/gatein/) portal on
 Avoiding conflicts specify git options to prefer this repo content. 
 
         git remote add gatein-openshift https://github.com/matejonnet/gatein-openshift.git
-        git pull -s recursive -X theirs --depth=1 gatein-openshift master
+        git pull -s recursive -X theirs gatein-openshift master
 
 
 1. Push everithing to OpenShift:

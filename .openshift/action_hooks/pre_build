@@ -26,7 +26,7 @@ fi
 if [ ! -f $gatein_built_marker ]; then
 
 	#TODO download as archive
-	git --git-dir=${gatein_git}.git --work-tree=${gatein_git} checkout 3.3.0-GA
+	git --git-dir=${gatein_git}.git --work-tree=${gatein_git} checkout tags/3.3.0-GA
 
 	sed -i -e "s/\${server.name}/jboss-as7/g" ${gatein_git}packaging/jboss-as7/modules/build.xml > /dev/null 2>&1
 	mvn -f ${gatein_git}packaging/jboss-as7/modules/pom.xml clean install
